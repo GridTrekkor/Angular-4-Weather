@@ -1,0 +1,96 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#weatherNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="">Angular Weather</a>
+    </div>
+    <div class="collapse navbar-collapse" id="weatherNavbar">
+      <ul class="nav navbar-nav" data-toggle="collapse">
+        <li><a href="#" (click)="getWeather('KMSP')" data-toggle="collapse" data-target="#weatherNavbar.in">Minneapolis</a></li>
+        <li><a href="#" (click)="getWeather('KEAU')" data-toggle="collapse" data-target="#weatherNavbar.in">Eau Claire</a></li>
+        <li><a href="#" (click)="getWeather('KORD')" data-toggle="collapse" data-target="#weatherNavbar.in">Chicago</a></li>
+        <li><a href="#" (click)="getWeather('KSAN')" data-toggle="collapse" data-target="#weatherNavbar.in">San Diego</a></li>
+        <li><a href="#" (click)="getWeather('EGLL')" data-toggle="collapse" data-target="#weatherNavbar.in">London</a></li>
+      </ul>
+      <div class="navbar-form navbar-right" role="search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Location" [(ngModel)]="searchTerm">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default" (click)="getWeather(searchTerm)" data-toggle="collapse" data-target="#weatherNavbar.in">Search</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="loading" *ngIf="loading">
+  <img src="../assets/gears.gif" />
+</div>
+
+<div class="text-center" *ngIf="weatherData && !loading">
+
+  <div class="main-area">
+
+    <div class="text-bold text-orange text-size-40">{{ weatherData.current_observation.observation_location.city }}</div>
+
+    <div class="border m-a-2"></div>
+
+    <div class="text-purple text-weight-900" style="font-size: 62px;">{{ weatherData.current_observation.temp_f }}</div>
+
+    <div class="m-a-1"><img [src]="weatherData.current_observation.icon_url" /></div>
+    <div class="text-size-28 text-green text-weight-300">{{ weatherData.current_observation.weather }}</div>
+
+    <div class="border m-a-2"></div>
+
+    <div class="text-blue text-bold text-size-18">humidity</div>
+    <div class="text-blue text-size-18 text-weight-200 m-b-2">{{ weatherData.current_observation.relative_humidity }}</div>
+
+    <div class="text-blue text-bold text-size-18">dew point</div>
+    <div class="text-blue text-size-18 text-weight-200 m-b-2">{{ weatherData.current_observation.dewpoint_f }}&deg;</div>
+
+    <div class="text-blue text-bold text-size-18">wind</div>
+    <div class="text-blue text-size-18 text-weight-200 m-b-2">{{ weatherData.current_observation.wind_mph }} mph {{ weatherData.current_observation.wind_dir }}</div>
+
+    <div class="text-blue text-bold text-size-18">pressure</div>
+    <div class="text-blue text-size-18 text-weight-200 m-b-2">{{ weatherData.current_observation.pressure_in }} {{ weatherData.current_observation.pressure_trend }}</div>
+
+    <div class="border m-a-2"></div>
+
+    <div class="text-size-28 text-blue text-weight-300">Forecast</div>
+
+    <div class="m-a-2" *ngFor="let forecast of weatherData.forecast.simpleforecast.forecastday">
+      <span class="text-green text-size-16 text-weight-700">{{ forecast.date.weekday }} {{ forecast.date.day }} {{ forecast.date.monthname }}</span>
+      <br>
+      <img [src]="forecast.icon_url" />
+      <br>
+      <span class="text-blue text-size-16">Hi <b>{{ forecast.high.fahrenheit }}</b>&nbsp;&nbsp;Lo <b>{{ forecast.low.fahrenheit }}</b></span>
+    </div>
+
+    <div class="border m-a-2"></div>
+
+    <div class="text-size-28 text-blue text-weight-300">Almanac</div>
+
+    <div class="text-green text-size-18 text-weight-700 m-t-2">Sunrise</div>
+    <div class="text-blue text-size-18 p-b-2">{{ weatherData.sun_phase.sunrise.hour }}.{{ weatherData.sun_phase.sunrise.minute }}</div>
+
+    <div class="text-green text-size-18 text-weight-700">Sunset</div>
+    <div class="text-blue text-size-18 p-b-2">{{ weatherData.sun_phase.sunset.hour }}.{{ weatherData.sun_phase.sunset.minute }}</div>
+
+    <div class="text-green text-size-18 text-weight-700">Averages</div>
+    <div class="text-blue text-size-16 p-b-2">Hi <b>{{ weatherData.almanac.temp_high.normal.F }}</b>&nbsp;&nbsp;Lo <b>{{ weatherData.almanac.temp_low.normal.F }}</b></div>
+
+    <div class="text-green text-size-18 text-weight-700">Records</div>
+    <div class="text-blue text-size-16 p-b-2">
+      Hi <b>{{ weatherData.almanac.temp_high.record.F }}</b> <small>({{ weatherData.almanac.temp_high.recordyear }})</small>
+      &nbsp;&nbsp;
+      Lo <b>{{ weatherData.almanac.temp_low.record.F }}</b> <small>({{ weatherData.almanac.temp_low.recordyear }})</small>
+    </div>
+
+  </div>
+
+</div>

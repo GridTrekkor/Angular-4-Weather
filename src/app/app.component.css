@@ -1,0 +1,63 @@
+.container-fluid {
+  background-color: #00699B;
+  border-color: #00699B;
+}
+
+.navbar-default .navbar-brand {
+  color: #FFF;
+  font-weight: bold;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #FFF;
+  font-weight: bold;
+}
+
+.navbar-default .navbar-nav li a {
+  color: #FFF;
+}
+
+.navbar-default .navbar-nav li a:hover,
+.navbar-default .navbar-nav li a:active,
+.navbar-default .navbar-nav li a:focus {
+  color: #7AA2FF;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #FFF;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+  background-color: #7AA2FF;
+}
+
+.main-area {
+  width: 80%;
+  height: 100%;
+  padding-top: 8px;
+  display: inline-block;
+}
+
+.border {
+  border-bottom: 1px solid #BFEAFF;
+}
+
+.loading {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20000;
+  background-color: #000;
+  -ms-opacity: 0.6;
+  opacity: 0.6;
+}
+
+.loading img {
+  position: relative;
+  z-index: 101;
+}
